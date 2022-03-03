@@ -1,0 +1,203 @@
+stages:
+  - DeployStaging
+  - DeployDemo
+  - DeployProduction
+  - DeployProduction2
+  - DeployProduction3
+  - DeployProduction4
+  - DeployEzbet
+
+.deploy-template: &deploy-template
+    before_script:
+        - '$env:Path = "$($env:Path);C:\Nuget"'
+        - 'Robocopy ${env:CI_PROJECT_DIR}\ F:\Website\Base.Api /e; if ($lastexitcode -eq 0){write-host "Robocopy succeeded"} else {write-host "RobocopyDone"}'
+        - 'nuget restore F:\Website\Base.Api\Base.Api\Base.Api.sln'
+    script:
+        - 'MSBuild F:\Website\Base.Api\Base.Api\Base.Api.sln /consoleloggerparameters:ErrorsOnly' # build the project
+
+stg_deploy:
+  <<: *deploy-template
+  stage: DeployStaging
+  tags: 
+    - Base.Api-STG
+  only:
+    - master
+    
+demo_deploy:
+    <<: *deploy-template
+    stage: DeployDemo
+    tags: 
+        - Base.Api-DEMO
+    when: manual
+    only:
+        - pre-production
+    
+a254_deploy:
+    <<: *deploy-template
+    stage: DeployProduction
+    tags: 
+        - Base.Api-A254
+    when: manual
+    only:
+        - production
+
+a255_deploy:
+    <<: *deploy-template
+    stage: DeployProduction
+    tags: 
+        - Base.Api-A255
+    when: manual
+    only:
+        - production
+    
+a256_deploy:
+    <<: *deploy-template
+    stage: DeployProduction
+    tags: 
+        - Base.Api-A256
+    when: manual
+    only:
+        - production
+
+a257_deploy:
+    <<: *deploy-template
+    stage: DeployProduction
+    tags: 
+        - Base.Api-A257
+    when: manual
+    only:
+        - production
+    
+a258_deploy:
+    <<: *deploy-template
+    stage: DeployProduction
+    tags: 
+        - Base.Api-A258
+    when: manual
+    only:
+        - production
+
+ezbet_deploy:
+    <<: *deploy-template
+    stage: DeployEzbet
+    tags: 
+        - Base.Api-Ezbet
+    when: manual
+    only:
+        - production
+    
+ufo_deploy:
+    <<: *deploy-template
+    stage: DeployProduction
+    tags: 
+        - Base.Api-UFO
+    when: manual
+    only:
+    - production
+    
+c171_deploy:
+    <<: *deploy-template
+    stage: DeployProduction2
+    tags: 
+        - Base.Api-C171
+    when: manual
+    only:
+        - production
+
+c172_deploy:
+    <<: *deploy-template
+    stage: DeployProduction2
+    tags: 
+        - Base.Api-C172
+    when: manual
+    only:
+        - production
+
+c173_deploy:
+    <<: *deploy-template
+    stage: DeployProduction2
+    tags: 
+        - Base.Api-C173
+    when: manual
+    only:
+        - production
+c141_deploy:
+    <<: *deploy-template
+    stage: DeployProduction3
+    tags: 
+        - Base.Api-C141
+    when: manual
+    only:
+        - production
+
+c142_deploy:
+    <<: *deploy-template
+    stage: DeployProduction3
+    tags: 
+        - Base.Api-C142
+    when: manual
+    only:
+        - production
+
+c143_deploy:
+    <<: *deploy-template
+    stage: DeployProduction3
+    tags: 
+        - Base.Api-C143
+    when: manual
+    only:
+        - production
+
+c111_deploy:
+    <<: *deploy-template
+    stage: DeployProduction4
+    tags: 
+        - Base.Api-C111
+    when: manual
+    only:
+        - production   
+
+c112_deploy:
+    <<: *deploy-template
+    stage: DeployProduction4
+    tags: 
+        - Base.Api-C112
+    when: manual
+    only:
+        - production   
+
+c113_deploy:
+    <<: *deploy-template
+    stage: DeployProduction4
+    tags: 
+        - Base.Api-C113
+    when: manual
+    only:
+        - production   
+
+c114_deploy:
+    <<: *deploy-template
+    stage: DeployProduction4
+    tags: 
+        - Base.Api-C114
+    when: manual
+    only:
+        - production   
+
+c115_deploy:
+    <<: *deploy-template
+    stage: DeployProduction4
+    tags: 
+        - Base.Api-C115
+    when: manual
+    only:
+        - production   
+
+c116_deploy:
+    <<: *deploy-template
+    stage: DeployProduction4
+    tags: 
+        - Base.Api-C116
+    when: manual
+    only:
+        - production   
